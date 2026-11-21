@@ -1,0 +1,5 @@
+name: 'seedcloud CDN'
+type: module
+description: 'Envía las cache tags a BunnyCDN (cabecera CDN-Tag) y purga por tag al invalidar contenido, a través del proxy de seedcloud.'
+package: seedcloud
+core_version_requirement: ^10.1 || ^11

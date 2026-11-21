@@ -1,0 +1,22 @@
+services:
+  seedcloud_cdn.settings:
+    class: Drupal\seedcloud_cdn\Settings
+    factory: ['Drupal\seedcloud_cdn\Settings', 'fromEnvironment']
+
+  seedcloud_cdn.response_subscriber:
+    class: Drupal\seedcloud_cdn\EventSubscriber\CdnTagSubscriber
+    arguments: ['@seedcloud_cdn.settings']
+    tags:
+      - { name: event_subscriber }
+
+  # Recibe cada invalidación de cache tags de Drupal y las envía en un lote al final de la solicitud.
+  seedcloud_cdn.purger:
+    class: Drupal\seedcloud_cdn\Cache\CdnTagPurger
+    arguments: ['@seedcloud_cdn.settings', '@http_client', '@logger.channel.seedcloud_cdn']
+    tags:
+      - { name: cache_tags_invalidator }
+      - { name: needs_destruction }
+
+  logger.channel.seedcloud_cdn:
+    parent: logger.channel_base
+    arguments: ['seedcloud_cdn']

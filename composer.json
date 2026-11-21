@@ -1,0 +1,19 @@
+{
+    "name": "seedcloud/seedcloud_cdn",
+    "description": "seedcloud: cache tags de Drupal en BunnyCDN (cabecera CDN-Tag y purgado por tag vía el proxy de la plataforma).",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=8.1",
+        "drupal/core": "^10.1 || ^11"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10 || ^11"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Drupal\\seedcloud_cdn\\": "src/",
+            "Drupal\\Tests\\seedcloud_cdn\\": "tests/src/"
+        }
+    }
+}
